@@ -17,6 +17,46 @@ Este projeto é um aplicativo mobile desenvolvido com React Native utilizando Ex
 - Expo Router
 - JavaScript / TypeScript
 
+  ## Estrutura do Projeto
+
+mobile-code/
+ ├── app/
+ │   ├── (tabs)/
+ │   │   ├── _layout.tsx
+ │   │   ├── courses.tsx
+ │   │   ├── index.tsx
+ │   │   ├── profile.tsx
+ │   │
+ │   ├── data/
+ │   │   └── courses.ts
+ │   │
+ │   ├── _layout.tsx
+ │   ├── details.tsx
+ │
+ ├── assets/
+ │   └── images/
+ │       ├── home.png
+ │       ├── cursos.png
+ │       ├── perfil.png
+ │       ├── detalhes.png
+ │       ├── icon.png
+ │       ├── favicon.png
+ │       ├── splash-icon.png
+ │       └── (outras imagens do projeto)
+ │
+ ├── components/
+ ├── constants/
+ ├── hooks/
+ ├── scripts/
+ │
+ ├── .gitignore
+ ├── app.json
+ ├── eslint.config.js
+ ├── package.json
+ ├── package-lock.json
+ ├── tsconfig.json
+ ├── README.md
+
 ## Telas do aplicativo
 
 - Home
