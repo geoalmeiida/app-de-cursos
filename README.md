@@ -17,7 +17,7 @@ Este projeto é um aplicativo mobile desenvolvido com React Native utilizando Ex
 - Expo Router
 - JavaScript / TypeScript
 
-  ## Estrutura do Projeto
+## Estrutura do Projeto
 
 mobile-code/
  ├── app/
@@ -41,8 +41,7 @@ mobile-code/
  │       ├── detalhes.png
  │       ├── icon.png
  │       ├── favicon.png
- │       ├── splash-icon.png
- │       └── (outras imagens do projeto)
+ │       └── splash-icon.png
  │
  ├── components/
  ├── constants/
@@ -55,7 +54,7 @@ mobile-code/
  ├── package.json
  ├── package-lock.json
  ├── tsconfig.json
- ├── README.md
+ └── README.md
 
 ## Telas do aplicativo
 
