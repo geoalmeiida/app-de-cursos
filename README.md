@@ -38,6 +38,20 @@ npm install
 4. Execute o projeto:
 npx expo start
 
+## Screenshots
+
+### Home
+![Home](./assets/images/home.png)
+
+### Cursos
+![Cursos](./assets/images/cursos.png)
+
+### Perfil
+![Perfil](./assets/images/perfil.png)
+
+### Detalhes
+![Detalhes](./assets/images/detalhes.png)
+
 
 ## Desenvolvido por
 
