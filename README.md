@@ -19,6 +19,7 @@ Este projeto é um aplicativo mobile desenvolvido com React Native utilizando Ex
 
 ## Estrutura do Projeto
 
+```text
 mobile-code/
  ├── app/
  │   ├── (tabs)/
