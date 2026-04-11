@@ -55,7 +55,9 @@ npx expo start
 
 ## Desenvolvido por
 
-Geovanna Almeida
+Aluna: Geovanna Santos de Almeida
+Matrícula: 01815451
+
 
    
    
