@@ -1,6 +1,6 @@
-import { useRouter } from 'expo-router';
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { courses } from '../data/courses';
+import { useRouter } from 'expo-router';
 
 export default function CoursesScreen() {
   const router = useRouter();
