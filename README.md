@@ -56,7 +56,7 @@ mobile-code/
  ├── package-lock.json
  ├── tsconfig.json
  └── README.md
-
+```
 ## Telas do aplicativo
 
 - Home
