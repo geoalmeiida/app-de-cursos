@@ -1,102 +1,76 @@
 # App de Cursos
 
-Este projeto é um aplicativo mobile desenvolvido com React Native utilizando Expo Router.
+Aplicativo mobile desenvolvido com React Native e Expo Router para listar cursos, abrir detalhes e acompanhar o perfil do aluno.
 
 ## Funcionalidades
 
-- Tela inicial (Home)
-- Listagem de cursos
-- Navegação entre telas
-- Tela de detalhes do curso
-- Tela de perfil do usuário
+- Tela inicial do aplicativo.
+- Listagem de cursos com `FlatList`.
+- Navegação por abas entre Home, Cursos e Perfil.
+- Navegação em pilha para a tela de detalhes.
+- Passagem de parâmetros do curso selecionado para a tela de detalhes.
 
-## Tecnologias utilizadas
+## Tecnologias
 
 - React Native
 - Expo
 - Expo Router
-- JavaScript / TypeScript
+- TypeScript
 
 ## Estrutura do Projeto
 
 ```text
-mobile-code/
- ├── app/
- │   ├── (tabs)/
- │   │   ├── _layout.tsx
- │   │   ├── courses.tsx
- │   │   ├── index.tsx
- │   │   ├── profile.tsx
- │   │
- │   ├── data/
- │   │   └── courses.ts
- │   │
- │   ├── _layout.tsx
- │   ├── details.tsx
- │
- ├── assets/
- │   └── images/
- │       ├── home.png
- │       ├── cursos.png
- │       ├── perfil.png
- │       ├── detalhes.png
- │       ├── icon.png
- │       ├── favicon.png
- │       └── splash-icon.png
- │
- ├── components/
- ├── constants/
- ├── hooks/
- ├── scripts/
- │
- ├── .gitignore
- ├── app.json
- ├── eslint.config.js
- ├── package.json
- ├── package-lock.json
- ├── tsconfig.json
- └── README.md
+app-de-cursos/
+├── app/                       # Rotas e telas do Expo Router
+│   ├── (tabs)/
+│   │   ├── _layout.tsx        # Navegação por abas
+│   │   ├── courses.tsx        # Lista de cursos
+│   │   ├── index.tsx          # Home
+│   │   └── profile.tsx        # Perfil do aluno
+│   ├── _layout.tsx            # Navegação principal em pilha
+│   └── details.tsx            # Detalhes do curso
+├── src/                       # Código reutilizável do app
+│   ├── components/            # Componentes compartilhados
+│   ├── constants/             # Constantes visuais e tema
+│   ├── data/                  # Dados usados pelas telas
+│   └── hooks/                 # Hooks reutilizáveis
+├── assets/
+│   ├── icons/                 # Ícones do aplicativo e splash
+│   ├── images/                # Imagens gerais do app
+│   └── screenshots/           # Capturas usadas no README
+├── scripts/
+├── app.json
+├── package.json
+├── package-lock.json
+├── tsconfig.json
+└── README.md
 ```
-## Telas do aplicativo
 
-- Home
-- Cursos
-- Detalhes
-- Perfil
+## Como executar
 
-## Como executar o projeto
-
-1. Clone o repositório:
-git clone https://github.com/geoalmeiida/app-de-cursos.git
-
-2. Acesse a pasta:
-cd app-de-cursos
-
-3. Instale as dependências:
+```bash
 npm install
-
-4. Execute o projeto:
 npx expo start
+```
 
 ## Screenshots
 
 ### Home
-![Home](./assets/images/home.png)
+
+![Home](./assets/screenshots/home.png)
 
 ### Cursos
-![Cursos](./assets/images/cursos.png)
+
+![Cursos](./assets/screenshots/cursos.png)
 
 ### Perfil
-![Perfil](./assets/images/perfil.png)
+
+![Perfil](./assets/screenshots/perfil.png)
 
 ### Detalhes
-![Detalhes](./assets/images/detalhes.png)
 
+![Detalhes](./assets/screenshots/detalhes.png)
 
-## Desenvolvedores: 
+## Desenvolvedores
 
- Geovanna Santos de Almeida - 01815451
-
-
-   
-   
+Geovanna Santos de Almeida - 01815451

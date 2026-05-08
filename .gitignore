@@ -38,6 +38,9 @@ yarn-error.*
 
 app-example
 
+# accidental nested project copy
+/app-de-cursos/
+
 # generated native folders
 /ios
 /android
