@@ -93,10 +93,9 @@ npx expo start
 ![Detalhes](./assets/images/detalhes.png)
 
 
-## Desenvolvido por
+## Desenvolvedores: 
 
-Aluna: Geovanna Santos de Almeida
-Matrícula: 01815451
+ Geovanna Santos de Almeida - 01815451
 
 
    
