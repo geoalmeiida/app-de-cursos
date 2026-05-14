@@ -23,7 +23,9 @@ export default function HomeScreen() {
       showsVerticalScrollIndicator={false}
     >
       <View style={styles.header}>
-        <Image source={appIcon} style={styles.logo} resizeMode="contain" />
+        <View style={styles.logoBox}>
+          <Image source={appIcon} style={styles.logo} resizeMode="contain" />
+        </View>
         <Text style={styles.eyebrow}>Área de estudos</Text>
         <Text style={styles.title}>App de Cursos</Text>
         <Text style={styles.subtitle}>
@@ -106,11 +108,26 @@ const styles = StyleSheet.create({
     marginTop: 28,
     marginBottom: 20,
   },
-  logo: {
-    width: 72,
-    height: 72,
-    borderRadius: 18,
+  logoBox: {
+    width: 82,
+    height: 82,
+    backgroundColor: '#FFFFFF',
+    borderColor: '#D8E2EF',
+    borderRadius: 22,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 16,
+    shadowColor: '#102A43',
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 5 },
+    elevation: 4,
+  },
+  logo: {
+    width: 58,
+    height: 58,
+    borderRadius: 16,
   },
   eyebrow: {
     color: '#2563EB',
