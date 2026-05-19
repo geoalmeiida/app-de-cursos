@@ -2,6 +2,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { ProgressBar } from '@/components/progress-bar';
+import { StatCard } from '@/components/stat-card';
 import { courses } from '@/data/courses';
 
 import appIcon from '../../assets/icons/icon.png';
@@ -34,20 +36,9 @@ export default function HomeScreen() {
       </View>
 
       <View style={styles.statsGrid}>
-        <View style={styles.statCard}>
-          <Text style={styles.statValue}>{totalCourses}</Text>
-          <Text style={styles.statLabel}>Cursos</Text>
-        </View>
-
-        <View style={styles.statCard}>
-          <Text style={styles.statValue}>{completedCourses}</Text>
-          <Text style={styles.statLabel}>Concluído</Text>
-        </View>
-
-        <View style={styles.statCard}>
-          <Text style={styles.statValue}>{averageProgress}%</Text>
-          <Text style={styles.statLabel}>Média</Text>
-        </View>
+        <StatCard value={totalCourses} label="Cursos" iconName="library" />
+        <StatCard value={completedCourses} label="Concluído" iconName="checkmark-circle" iconColor="#16A34A" />
+        <StatCard value={`${averageProgress}%`} label="Média" iconName="stats-chart" iconColor="#D97706" />
       </View>
 
       {currentCourse && (
@@ -62,8 +53,8 @@ export default function HomeScreen() {
             </View>
           </View>
 
-          <View style={styles.progressTrack}>
-            <View style={[styles.progressFill, { width: `${currentCourse.progress}%` }]} />
+          <View style={styles.progressSpacing}>
+            <ProgressBar value={currentCourse.progress} />
           </View>
 
           <Text style={styles.featuredDescription}>{currentCourse.description}</Text>
@@ -153,29 +144,6 @@ const styles = StyleSheet.create({
     marginHorizontal: -6,
     marginBottom: 16,
   },
-  statCard: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    marginHorizontal: 6,
-    padding: 16,
-    shadowColor: '#102A43',
-    shadowOpacity: 0.08,
-    shadowRadius: 10,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 3,
-  },
-  statValue: {
-    color: '#0F172A',
-    fontSize: 26,
-    fontWeight: '800',
-    marginBottom: 4,
-  },
-  statLabel: {
-    color: '#64748B',
-    fontSize: 13,
-    fontWeight: '600',
-  },
   featuredCard: {
     backgroundColor: '#FFFFFF',
     borderRadius: 16,
@@ -216,17 +184,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '800',
   },
-  progressTrack: {
-    height: 8,
-    backgroundColor: '#E2E8F0',
-    borderRadius: 999,
-    overflow: 'hidden',
+  progressSpacing: {
     marginBottom: 14,
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#2563EB',
-    borderRadius: 999,
   },
   featuredDescription: {
     color: '#475569',

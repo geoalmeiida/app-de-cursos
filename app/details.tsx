@@ -2,6 +2,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
+import { ProgressBar } from '@/components/progress-bar';
 import { courses } from '@/data/courses';
 
 import courseImage from '../assets/images/react-logo.png';
@@ -69,9 +70,7 @@ export default function DetailsScreen() {
           <Text style={styles.sectionTitle}>Progresso do curso</Text>
           <Text style={styles.progressValue}>{course.progress}%</Text>
         </View>
-        <View style={styles.progressTrack}>
-          <View style={[styles.progressFill, { width: `${course.progress}%` }]} />
-        </View>
+        <ProgressBar value={course.progress} />
       </View>
 
       <View style={styles.section}>
@@ -210,17 +209,6 @@ const styles = StyleSheet.create({
     color: '#2563EB',
     fontSize: 15,
     fontWeight: '800',
-  },
-  progressTrack: {
-    height: 8,
-    backgroundColor: '#E2E8F0',
-    borderRadius: 999,
-    overflow: 'hidden',
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#2563EB',
-    borderRadius: 999,
   },
   moduleItem: {
     flexDirection: 'row',

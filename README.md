@@ -1,19 +1,30 @@
 # App de Cursos
 
-Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visualizar detalhes e acompanhar o progresso do aluno.
+Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visualizar detalhes, acompanhar progresso e demonstrar uso de sensores do dispositivo.
 
 ## Funcionalidades
 
-- Tela inicial com apresentação do aplicativo e resumo de progresso.
+- Tela inicial com apresentacao do aplicativo e resumo de progresso.
 - Tela de cursos com listagem usando `FlatList`.
-- Busca por nome, descrição ou categoria do curso.
+- Busca por nome, descricao ou categoria do curso.
 - Filtros por categoria.
-- Cards de cursos com imagem, título, categoria, duração, quantidade de aulas, nível e progresso.
-- Tela de detalhes com informações completas do curso selecionado.
-- Passagem de parâmetros entre telas usando o `id` do curso.
-- Tela de perfil com dados do aluno, progresso geral e estatísticas.
-- Navegação por abas entre Início, Cursos e Perfil.
-- Navegação em pilha para a tela de detalhes.
+- Cards de cursos com imagem, titulo, categoria, duracao, quantidade de aulas, nivel e progresso.
+- Tela de detalhes com informacoes completas do curso selecionado.
+- Passagem de parametros entre telas usando o `id` do curso.
+- Tela de perfil com dados do aluno, progresso geral e estatisticas.
+- Tela de sensores com camera e geolocalizacao.
+- Explicacao dentro do app sobre camera, geolocalizacao e permissoes.
+- Navegacao por abas entre Inicio, Cursos, Perfil e Sensores.
+- Navegacao em pilha para a tela de detalhes.
+
+## Sensores
+
+O projeto usa dois recursos do dispositivo:
+
+- Camera: exibida na tela Sensores com previa ao vivo e alternancia entre camera traseira e frontal.
+- Geolocalizacao: solicita permissao e mostra latitude, longitude e precisao da localizacao atual.
+
+As permissoes foram configuradas no `app.json` para Android e iOS.
 
 ## Tecnologias Utilizadas
 
@@ -23,43 +34,51 @@ Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visua
 - TypeScript
 - React Navigation
 - Expo Vector Icons
+- Expo Camera
+- Expo Location
 
 ## Estrutura do Projeto
 
 ```text
 app-de-cursos/
-├── app/
-│   ├── (tabs)/
-│   │   ├── _layout.tsx
-│   │   ├── courses.tsx
-│   │   ├── index.tsx
-│   │   └── profile.tsx
-│   ├── _layout.tsx
-│   └── details.tsx
-├── src/
-│   ├── components/
-│   ├── constants/
-│   ├── data/
-│   ├── hooks/
-│   └── types/
-├── assets/
-│   ├── icons/
-│   ├── images/
-│   └── screenshots/
-├── scripts/
-├── app.json
-├── package.json
-├── package-lock.json
-├── tsconfig.json
-└── README.md
+|-- app/
+|   |-- (tabs)/
+|   |   |-- _layout.tsx
+|   |   |-- courses.tsx
+|   |   |-- index.tsx
+|   |   |-- profile.tsx
+|   |   `-- sensors.tsx
+|   |-- _layout.tsx
+|   `-- details.tsx
+|-- src/
+|   |-- components/
+|   |   |-- category-filter.tsx
+|   |   |-- course-card.tsx
+|   |   |-- progress-bar.tsx
+|   |   `-- stat-card.tsx
+|   |-- constants/
+|   |-- data/
+|   |-- hooks/
+|   `-- types/
+|-- assets/
+|   |-- icons/
+|   |-- images/
+|   `-- screenshots/
+|-- scripts/
+|-- app.json
+|-- package.json
+|-- package-lock.json
+|-- tsconfig.json
+`-- README.md
 ```
 
 ## Telas do Aplicativo
 
-- Início: mostra a apresentação do app, resumo dos cursos e progresso geral.
-- Cursos: exibe a lista de cursos disponíveis com busca e filtros.
-- Detalhes: mostra informações completas do curso, módulos, progresso e ações.
-- Perfil: mostra dados do aluno, estatísticas e progresso de estudo.
+- Inicio: mostra a apresentacao do app, resumo dos cursos e progresso geral.
+- Cursos: exibe a lista de cursos disponiveis com busca e filtros.
+- Detalhes: mostra informacoes completas do curso, modulos, progresso e acoes.
+- Perfil: mostra dados do aluno, estatisticas e progresso de estudo.
+- Sensores: demonstra camera, geolocalizacao e explica o papel de cada sensor.
 
 ## Como Instalar
 
@@ -73,29 +92,33 @@ npm install
 npx expo start
 ```
 
-Depois de iniciar o Expo, escolha uma das opções exibidas no terminal:
+Depois de iniciar o Expo, escolha uma das opcoes exibidas no terminal:
 
 - Pressione `w` para abrir no navegador.
 - Pressione `a` para abrir no emulador Android.
 - Escaneie o QR Code usando o aplicativo Expo Go.
 
-## Critérios Atendidos
+## Criterios Atendidos
 
 - Aplicativo funcional desenvolvido com React Native e Expo.
-- Mínimo de 4 telas funcionais.
-- Navegação por abas.
-- Navegação em pilha para detalhes.
-- Passagem de parâmetros entre telas.
-- Cabeçalhos personalizados.
+- Mais de 4 telas funcionais.
+- Navegacao por abas.
+- Navegacao em pilha para detalhes.
+- Passagem de parametros entre telas.
+- Telas e rotas separadas.
+- Componentes reutilizaveis em `src/components`.
 - Lista com `FlatList` e 10 cursos.
 - Cards com imagem e texto.
-- Tela de detalhes com informações completas.
+- Tela de detalhes com informacoes completas.
 - Tela de perfil do aluno.
-- Interface com ícones, cores organizadas e layout responsivo.
+- Uso de sensor de camera.
+- Uso de sensor de geolocalizacao.
+- Explicacao dos sensores dentro do app.
+- Interface com icones, cores organizadas e layout responsivo.
 
 ## Screenshots
 
-### Início
+### Inicio
 
 ![Tela inicial](./assets/screenshots/home.png)
 
@@ -114,4 +137,4 @@ Depois de iniciar o Expo, escolha uma das opções exibidas no terminal:
 ## Desenvolvedora
 
 Geovanna Santos de Almeida  
-Matrícula: 01815451
+Matricula: 01815451

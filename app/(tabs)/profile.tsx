@@ -1,6 +1,8 @@
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 
+import { ProgressBar } from '@/components/progress-bar';
+import { StatCard } from '@/components/stat-card';
 import { courses } from '@/data/courses';
 
 const completedCourses = courses.filter((course) => course.progress === 100).length;
@@ -35,31 +37,17 @@ export default function ProfileScreen() {
           <Text style={styles.progressValue}>{averageProgress}%</Text>
         </View>
 
-        <View style={styles.progressTrack}>
-          <View style={[styles.progressFill, { width: `${averageProgress}%` }]} />
+        <View style={styles.progressSpacing}>
+          <ProgressBar value={averageProgress} />
         </View>
 
         <Text style={styles.progressText}>Continue avançando nos cursos em andamento.</Text>
       </View>
 
       <View style={styles.statsGrid}>
-        <View style={styles.statCard}>
-          <Ionicons name="checkmark-circle" size={22} color="#16A34A" />
-          <Text style={styles.statValue}>{completedCourses}</Text>
-          <Text style={styles.statLabel}>Concluídos</Text>
-        </View>
-
-        <View style={styles.statCard}>
-          <Ionicons name="school" size={22} color="#2563EB" />
-          <Text style={styles.statValue}>{inProgressCourses}</Text>
-          <Text style={styles.statLabel}>Em andamento</Text>
-        </View>
-
-        <View style={styles.statCard}>
-          <Ionicons name="ribbon" size={22} color="#D97706" />
-          <Text style={styles.statValue}>1</Text>
-          <Text style={styles.statLabel}>Certificado</Text>
-        </View>
+        <StatCard value={completedCourses} label="Concluídos" iconName="checkmark-circle" iconColor="#16A34A" />
+        <StatCard value={inProgressCourses} label="Em andamento" iconName="school" />
+        <StatCard value={1} label="Certificado" iconName="ribbon" iconColor="#D97706" />
       </View>
 
       <View style={styles.section}>
@@ -169,17 +157,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
   },
-  progressTrack: {
-    height: 8,
-    backgroundColor: '#E2E8F0',
-    borderRadius: 999,
-    overflow: 'hidden',
+  progressSpacing: {
     marginBottom: 10,
-  },
-  progressFill: {
-    height: '100%',
-    backgroundColor: '#2563EB',
-    borderRadius: 999,
   },
   progressText: {
     color: '#64748B',
@@ -189,25 +168,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: -6,
     marginBottom: 14,
-  },
-  statCard: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-    borderRadius: 14,
-    marginHorizontal: 6,
-    padding: 14,
-  },
-  statValue: {
-    color: '#0F172A',
-    fontSize: 23,
-    fontWeight: '800',
-    marginTop: 8,
-    marginBottom: 3,
-  },
-  statLabel: {
-    color: '#64748B',
-    fontSize: 12,
-    fontWeight: '700',
   },
   section: {
     backgroundColor: '#FFFFFF',
