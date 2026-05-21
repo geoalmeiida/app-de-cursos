@@ -3,10 +3,10 @@ import * as Location from 'expo-location';
 import { useState } from 'react';
 import {
   ActivityIndicator,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -130,10 +130,13 @@ export default function ProfileScreen() {
 
         <Text style={styles.locationMessage}>{locationMessage}</Text>
 
-        <TouchableOpacity
-          activeOpacity={0.85}
+        <Pressable
           disabled={isLoadingLocation}
-          style={[styles.locationButton, isLoadingLocation && styles.locationButtonDisabled]}
+          style={({ pressed }) => [
+            styles.locationButton,
+            isLoadingLocation && styles.locationButtonDisabled,
+            pressed && styles.locationButtonPressed,
+          ]}
           onPress={getAddressFromLocation}
         >
           {isLoadingLocation ? (
@@ -142,7 +145,7 @@ export default function ProfileScreen() {
             <Ionicons name="locate" size={18} color="#FFFFFF" />
           )}
           <Text style={styles.locationButtonText}>Usar localizacao atual</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
       <View style={styles.section}>
@@ -335,6 +338,9 @@ const styles = StyleSheet.create({
   },
   locationButtonDisabled: {
     opacity: 0.72,
+  },
+  locationButtonPressed: {
+    opacity: 0.85,
   },
   locationButtonText: {
     color: '#FFFFFF',

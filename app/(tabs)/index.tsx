@@ -1,12 +1,11 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image } from 'expo-image';
+import { Link } from 'expo-router';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { ProgressBar } from '@/components/progress-bar';
 import { StatCard } from '@/components/stat-card';
 import { courses } from '@/data/courses';
-
-import appIcon from '../../assets/icons/icon.png';
 
 const totalCourses = courses.length;
 const completedCourses = courses.filter((course) => course.progress === 100).length;
@@ -16,8 +15,6 @@ const averageProgress = Math.round(
 const currentCourse = courses.find((course) => course.progress > 0 && course.progress < 100);
 
 export default function HomeScreen() {
-  const router = useRouter();
-
   return (
     <ScrollView
       style={styles.container}
@@ -26,7 +23,11 @@ export default function HomeScreen() {
     >
       <View style={styles.header}>
         <View style={styles.logoBox}>
-          <Image source={appIcon} style={styles.logo} resizeMode="contain" />
+          <Image
+            source={require('../../assets/icons/icon.png')}
+            style={styles.logo}
+            contentFit="contain"
+          />
         </View>
         <Text style={styles.eyebrow}>Área de estudos</Text>
         <Text style={styles.title}>App de Cursos</Text>
@@ -59,26 +60,21 @@ export default function HomeScreen() {
 
           <Text style={styles.featuredDescription}>{currentCourse.description}</Text>
 
-          <TouchableOpacity
-            activeOpacity={0.85}
-            style={styles.primaryButton}
-            onPress={() =>
-              router.push({
-                pathname: '/details',
-                params: { id: currentCourse.id },
-              })
-            }
-          >
-            <Ionicons name="play-circle" size={20} color="#FFFFFF" />
-            <Text style={styles.primaryButtonText}>Continuar curso</Text>
-          </TouchableOpacity>
+          <Link href={{ pathname: '/details', params: { id: currentCourse.id } }} asChild>
+            <TouchableOpacity activeOpacity={0.85} style={styles.primaryButton}>
+              <Ionicons name="play-circle" size={20} color="#FFFFFF" />
+              <Text style={styles.primaryButtonText}>Continuar curso</Text>
+            </TouchableOpacity>
+          </Link>
         </View>
       )}
 
-      <TouchableOpacity activeOpacity={0.85} style={styles.outlineButton} onPress={() => router.push('/courses')}>
-        <Ionicons name="library" size={20} color="#2563EB" />
-        <Text style={styles.outlineButtonText}>Ver todos os cursos</Text>
-      </TouchableOpacity>
+      <Link href="/courses" asChild>
+        <TouchableOpacity activeOpacity={0.85} style={styles.outlineButton}>
+          <Ionicons name="library" size={20} color="#2563EB" />
+          <Text style={styles.outlineButtonText}>Ver todos os cursos</Text>
+        </TouchableOpacity>
+      </Link>
     </ScrollView>
   );
 }

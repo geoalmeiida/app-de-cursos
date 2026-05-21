@@ -1,56 +1,71 @@
 import { Ionicons } from '@expo/vector-icons';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Link } from 'expo-router';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { Course } from '@/data/courses';
 
 import { ProgressBar } from './progress-bar';
-import courseImage from '../../assets/images/react-logo.png';
 
 type CourseCardProps = {
   course: Course;
-  onPress: (course: Course) => void;
 };
 
-export function CourseCard({ course, onPress }: CourseCardProps) {
+type IconName = keyof typeof Ionicons.glyphMap;
+
+const categoryIcons: Record<string, IconName> = {
+  'Back-end': 'server-outline',
+  Design: 'color-palette-outline',
+  Ferramentas: 'construct-outline',
+  'Front-end': 'code-slash-outline',
+  Mobile: 'phone-portrait-outline',
+  Programacao: 'logo-javascript',
+  Programação: 'logo-javascript',
+};
+
+export function CourseCard({ course }: CourseCardProps) {
+  const iconName = categoryIcons[course.category] ?? 'school-outline';
+
   return (
-    <TouchableOpacity activeOpacity={0.85} style={styles.card} onPress={() => onPress(course)}>
-      <View style={styles.cardHeader}>
-        <View style={styles.thumbnail}>
-          <Image source={courseImage} style={styles.thumbnailImage} resizeMode="contain" />
+    <Link href={{ pathname: '/details', params: { id: course.id } }} asChild>
+      <TouchableOpacity activeOpacity={0.85} style={styles.card}>
+        <View style={styles.cardHeader}>
+          <View style={styles.thumbnail}>
+            <Ionicons name={iconName} size={28} color="#2563EB" />
+          </View>
+
+          <View style={styles.cardTitleGroup}>
+            <Text style={styles.courseTitle}>{course.title}</Text>
+            <View style={styles.categoryBadge}>
+              <Text style={styles.categoryText}>{course.category}</Text>
+            </View>
+          </View>
+          <Ionicons name="chevron-forward" size={20} color="#94A3B8" />
         </View>
 
-        <View style={styles.cardTitleGroup}>
-          <Text style={styles.courseTitle}>{course.title}</Text>
-          <View style={styles.categoryBadge}>
-            <Text style={styles.categoryText}>{course.category}</Text>
+        <Text style={styles.description}>{course.description}</Text>
+
+        <View style={styles.metaRow}>
+          <View style={styles.metaItem}>
+            <Ionicons name="time-outline" size={16} color="#64748B" />
+            <Text style={styles.metaText}>{course.duration}</Text>
+          </View>
+          <View style={styles.metaItem}>
+            <Ionicons name="albums-outline" size={16} color="#64748B" />
+            <Text style={styles.metaText}>{course.lessons} aulas</Text>
+          </View>
+          <View style={styles.metaItem}>
+            <Ionicons name="speedometer-outline" size={16} color="#64748B" />
+            <Text style={styles.metaText}>{course.level}</Text>
           </View>
         </View>
-        <Ionicons name="chevron-forward" size={20} color="#94A3B8" />
-      </View>
 
-      <Text style={styles.description}>{course.description}</Text>
-
-      <View style={styles.metaRow}>
-        <View style={styles.metaItem}>
-          <Ionicons name="time-outline" size={16} color="#64748B" />
-          <Text style={styles.metaText}>{course.duration}</Text>
+        <View style={styles.progressHeader}>
+          <Text style={styles.progressLabel}>Progresso</Text>
+          <Text style={styles.progressValue}>{course.progress}%</Text>
         </View>
-        <View style={styles.metaItem}>
-          <Ionicons name="albums-outline" size={16} color="#64748B" />
-          <Text style={styles.metaText}>{course.lessons} aulas</Text>
-        </View>
-        <View style={styles.metaItem}>
-          <Ionicons name="speedometer-outline" size={16} color="#64748B" />
-          <Text style={styles.metaText}>{course.level}</Text>
-        </View>
-      </View>
-
-      <View style={styles.progressHeader}>
-        <Text style={styles.progressLabel}>Progresso</Text>
-        <Text style={styles.progressValue}>{course.progress}%</Text>
-      </View>
-      <ProgressBar value={course.progress} height={7} />
-    </TouchableOpacity>
+        <ProgressBar value={course.progress} height={7} />
+      </TouchableOpacity>
+    </Link>
   );
 }
 
@@ -80,10 +95,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginRight: 12,
-  },
-  thumbnailImage: {
-    width: 34,
-    height: 34,
   },
   cardTitleGroup: {
     flex: 1,

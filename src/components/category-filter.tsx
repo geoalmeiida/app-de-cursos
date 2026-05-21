@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 type CategoryFilterProps = {
   categories: string[];
@@ -17,16 +17,19 @@ export function CategoryFilter({
         const isSelected = category === selectedCategory;
 
         return (
-          <TouchableOpacity
+          <Pressable
             key={category}
-            activeOpacity={0.85}
-            style={[styles.filterChip, isSelected && styles.filterChipSelected]}
+            style={({ pressed }) => [
+              styles.filterChip,
+              isSelected && styles.filterChipSelected,
+              pressed && styles.filterChipPressed,
+            ]}
             onPress={() => onSelectCategory(category)}
           >
             <Text style={[styles.filterText, isSelected && styles.filterTextSelected]}>
               {category}
             </Text>
-          </TouchableOpacity>
+          </Pressable>
         );
       })}
     </View>
@@ -58,6 +61,9 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 3 },
     elevation: 2,
+  },
+  filterChipPressed: {
+    opacity: 0.85,
   },
   filterText: {
     color: '#475569',

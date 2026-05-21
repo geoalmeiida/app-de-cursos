@@ -1,26 +1,27 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useLocalSearchParams, useRouter } from 'expo-router';
-import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Link, useLocalSearchParams } from 'expo-router';
+import { Image } from 'expo-image';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 import { ProgressBar } from '@/components/progress-bar';
 import { courses } from '@/data/courses';
 
-import courseImage from '../assets/images/react-logo.png';
-
 export default function DetailsScreen() {
-  const router = useRouter();
-  const { id } = useLocalSearchParams<{ id?: string }>();
+  const { id, started } = useLocalSearchParams<{ id?: string; started?: string }>();
   const course = courses.find((item) => item.id === id);
+  const hasStarted = started === 'true';
 
   if (!course) {
     return (
       <View style={styles.emptyContainer}>
         <Ionicons name="alert-circle-outline" size={44} color="#94A3B8" />
         <Text style={styles.emptyTitle}>Curso não encontrado</Text>
-        <TouchableOpacity activeOpacity={0.85} style={styles.secondaryButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={18} color="#2563EB" />
-          <Text style={styles.secondaryButtonText}>Voltar</Text>
-        </TouchableOpacity>
+        <Link href="/courses" asChild>
+          <TouchableOpacity activeOpacity={0.85} style={styles.secondaryButton}>
+            <Ionicons name="arrow-back" size={18} color="#2563EB" />
+            <Text style={styles.secondaryButtonText}>Voltar</Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     );
   }
@@ -33,7 +34,11 @@ export default function DetailsScreen() {
     >
       <View style={styles.hero}>
         <View style={styles.imageBox}>
-          <Image source={courseImage} style={styles.heroImage} resizeMode="contain" />
+          <Image
+            source={require('../assets/images/react-logo.png')}
+            style={styles.heroImage}
+            contentFit="contain"
+          />
         </View>
 
         <View style={styles.heroContent}>
@@ -85,16 +90,27 @@ export default function DetailsScreen() {
         ))}
       </View>
 
-      <View style={styles.actions}>
-        <TouchableOpacity activeOpacity={0.85} style={styles.secondaryButton} onPress={() => router.back()}>
-          <Ionicons name="arrow-back" size={18} color="#2563EB" />
-          <Text style={styles.secondaryButtonText}>Voltar</Text>
-        </TouchableOpacity>
+      {hasStarted && (
+        <View style={styles.startedCard}>
+          <Ionicons name="checkmark-circle" size={22} color="#16A34A" />
+          <Text style={styles.startedText}>Curso iniciado. Bom estudo!</Text>
+        </View>
+      )}
 
-        <TouchableOpacity activeOpacity={0.85} style={styles.primaryButton}>
-          <Ionicons name="play-circle" size={20} color="#FFFFFF" />
-          <Text style={styles.primaryButtonText}>Começar curso</Text>
-        </TouchableOpacity>
+      <View style={styles.actions}>
+        <Link href="/courses" asChild>
+          <TouchableOpacity activeOpacity={0.85} style={styles.secondaryButton}>
+            <Ionicons name="arrow-back" size={18} color="#2563EB" />
+            <Text style={styles.secondaryButtonText}>Voltar</Text>
+          </TouchableOpacity>
+        </Link>
+
+        <Link href={{ pathname: '/details', params: { id: course.id, started: 'true' } }} asChild>
+          <TouchableOpacity activeOpacity={0.85} style={styles.primaryButton}>
+            <Ionicons name="play-circle" size={20} color="#FFFFFF" />
+            <Text style={styles.primaryButtonText}>Começar curso</Text>
+          </TouchableOpacity>
+        </Link>
       </View>
     </ScrollView>
   );
@@ -238,6 +254,22 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: 'row',
     flexWrap: 'wrap',
+  },
+  startedCard: {
+    alignItems: 'center',
+    backgroundColor: '#F0FDF4',
+    borderColor: '#BBF7D0',
+    borderRadius: 14,
+    borderWidth: 1,
+    flexDirection: 'row',
+    marginBottom: 14,
+    padding: 14,
+  },
+  startedText: {
+    color: '#166534',
+    fontSize: 15,
+    fontWeight: '800',
+    marginLeft: 8,
   },
   primaryButton: {
     backgroundColor: '#2563EB',

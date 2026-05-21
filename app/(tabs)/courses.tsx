@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useLocalSearchParams } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
 import {
   FlatList,
   StyleSheet,
@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { CategoryFilter } from '@/components/category-filter';
 import { CourseCard } from '@/components/course-card';
@@ -16,9 +17,13 @@ import { Course, courses } from '@/data/courses';
 const categories = ['Todos', ...Array.from(new Set(courses.map((course) => course.category)))];
 
 export default function CoursesScreen() {
-  const router = useRouter();
+  const { category } = useLocalSearchParams<{ category?: string }>();
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [selectedCategory, setSelectedCategory] = useState(category ?? 'Todos');
+
+  useEffect(() => {
+    setSelectedCategory(category ?? 'Todos');
+  }, [category]);
 
   const filteredCourses = useMemo(() => {
     const normalizedSearch = searchTerm.trim().toLowerCase();
@@ -34,19 +39,12 @@ export default function CoursesScreen() {
     });
   }, [searchTerm, selectedCategory]);
 
-  const openCourseDetails = (course: Course) => {
-    router.push({
-      pathname: '/details',
-      params: { id: course.id },
-    });
-  };
-
   const renderCourse = ({ item }: { item: Course }) => (
-    <CourseCard course={item} onPress={openCourseDetails} />
+    <CourseCard course={item} />
   );
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.content}>
         <Text style={styles.title}>Explore os Cursos</Text>
 
@@ -82,7 +80,7 @@ export default function CoursesScreen() {
           }
         />
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -97,7 +95,7 @@ const styles = StyleSheet.create({
     maxWidth: 960,
     alignSelf: 'center',
     paddingHorizontal: 16,
-    paddingTop: 20,
+    paddingTop: 12,
   },
   title: {
     color: '#0F3761',
