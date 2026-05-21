@@ -133,3 +133,4 @@ Geovanna Santos de Almeida- 01815451
 Josinaldo da Silva Xavier- 01823400
 Isabelle Victoria Galdino Santos- 01808806
 Gabriela Sabino Pinho de Araujo- 01660021
+Gabrielly Rodrigues- 01797929
