@@ -11,8 +11,7 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSCameraUsageDescription": "Permita que o app use a camera para registrar atividades de estudo.",
-        "NSLocationWhenInUseUsageDescription": "Permita que o app use sua localizacao durante uma atividade de estudo."
+        "NSLocationWhenInUseUsageDescription": "Permita que o app use sua localizacao para encontrar seu endereco no perfil."
       }
     },
     "android": {
@@ -24,7 +23,6 @@
       },
       "edgeToEdgeEnabled": true,
       "permissions": [
-        "CAMERA",
         "ACCESS_FINE_LOCATION",
         "ACCESS_COARSE_LOCATION"
       ],
@@ -49,15 +47,9 @@
         }
       ],
       [
-        "expo-camera",
-        {
-          "cameraPermission": "Permita que o app use a camera para registrar atividades de estudo."
-        }
-      ],
-      [
         "expo-location",
         {
-          "locationWhenInUsePermission": "Permita que o app use sua localizacao durante uma atividade de estudo."
+          "locationWhenInUsePermission": "Permita que o app use sua localizacao para encontrar seu endereco no perfil."
         }
       ]
     ],

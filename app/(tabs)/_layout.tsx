@@ -42,15 +42,6 @@ export default function TabLayout() {
           ),
         }}
       />
-      <Tabs.Screen
-        name="sensors"
-        options={{
-          title: 'Sensores',
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="hardware-chip" size={size} color={color} />
-          ),
-        }}
-      />
     </Tabs>
   );
 }

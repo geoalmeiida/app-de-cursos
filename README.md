@@ -1,6 +1,6 @@
 # App de Cursos
 
-Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visualizar detalhes, acompanhar progresso e demonstrar uso de sensores do dispositivo.
+Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visualizar detalhes, acompanhar progresso e demonstrar uso de geolocalizacao.
 
 ## Funcionalidades
 
@@ -11,20 +11,18 @@ Aplicativo mobile desenvolvido com React Native e Expo para listar cursos, visua
 - Cards de cursos com imagem, titulo, categoria, duracao, quantidade de aulas, nivel e progresso.
 - Tela de detalhes com informacoes completas do curso selecionado.
 - Passagem de parametros entre telas usando o `id` do curso.
-- Tela de perfil com dados do aluno, progresso geral e estatisticas.
-- Tela de sensores com camera e geolocalizacao.
-- Explicacao dentro do app sobre camera, geolocalizacao e permissoes.
-- Navegacao por abas entre Inicio, Cursos, Perfil e Sensores.
+- Tela de perfil com dados do aluno, progresso geral, estatisticas e endereco por geolocalizacao.
+- Botao no perfil para usar a localizacao atual e exibir o endereco encontrado.
+- Navegacao por abas entre Inicio, Cursos e Perfil.
 - Navegacao em pilha para a tela de detalhes.
 
-## Sensores
+## Geolocalizacao
 
-O projeto usa dois recursos do dispositivo:
+O projeto usa um recurso do dispositivo:
 
-- Camera: exibida na tela Sensores com previa ao vivo e alternancia entre camera traseira e frontal.
-- Geolocalizacao: solicita permissao e mostra latitude, longitude e precisao da localizacao atual.
+- Geolocalizacao: solicita permissao e exibe o endereco encontrado na tela de perfil.
 
-As permissoes foram configuradas no `app.json` para Android e iOS.
+A permissao foi configurada no `app.json` para Android e iOS.
 
 ## Tecnologias Utilizadas
 
@@ -34,7 +32,6 @@ As permissoes foram configuradas no `app.json` para Android e iOS.
 - TypeScript
 - React Navigation
 - Expo Vector Icons
-- Expo Camera
 - Expo Location
 
 ## Estrutura do Projeto
@@ -46,8 +43,7 @@ app-de-cursos/
 |   |   |-- _layout.tsx
 |   |   |-- courses.tsx
 |   |   |-- index.tsx
-|   |   |-- profile.tsx
-|   |   `-- sensors.tsx
+|   |   `-- profile.tsx
 |   |-- _layout.tsx
 |   `-- details.tsx
 |-- src/
@@ -77,8 +73,7 @@ app-de-cursos/
 - Inicio: mostra a apresentacao do app, resumo dos cursos e progresso geral.
 - Cursos: exibe a lista de cursos disponiveis com busca e filtros.
 - Detalhes: mostra informacoes completas do curso, modulos, progresso e acoes.
-- Perfil: mostra dados do aluno, estatisticas e progresso de estudo.
-- Sensores: demonstra camera, geolocalizacao e explica o papel de cada sensor.
+- Perfil: mostra dados do aluno, estatisticas, progresso de estudo e endereco obtido por geolocalizacao.
 
 ## Como Instalar
 
@@ -101,7 +96,7 @@ Depois de iniciar o Expo, escolha uma das opcoes exibidas no terminal:
 ## Criterios Atendidos
 
 - Aplicativo funcional desenvolvido com React Native e Expo.
-- Mais de 4 telas funcionais.
+- 4 telas funcionais.
 - Navegacao por abas.
 - Navegacao em pilha para detalhes.
 - Passagem de parametros entre telas.
@@ -111,9 +106,7 @@ Depois de iniciar o Expo, escolha uma das opcoes exibidas no terminal:
 - Cards com imagem e texto.
 - Tela de detalhes com informacoes completas.
 - Tela de perfil do aluno.
-- Uso de sensor de camera.
-- Uso de sensor de geolocalizacao.
-- Explicacao dos sensores dentro do app.
+- Uso de sensor de geolocalizacao na tela de perfil.
 - Interface com icones, cores organizadas e layout responsivo.
 
 ## Screenshots
@@ -134,7 +127,9 @@ Depois de iniciar o Expo, escolha uma das opcoes exibidas no terminal:
 
 ![Tela de perfil](./assets/screenshots/perfil.png)
 
-## Desenvolvedora
+## Desenvolvedores
 
-Geovanna Santos de Almeida  
-Matricula: 01815451
+Geovanna Santos de Almeida- 01815451
+Josinaldo da Silva Xavier- 01823400
+Isabelle Victoria Galdino Santos- 01808806
+Gabriela Sabino Pinho de Araujo- 01660021

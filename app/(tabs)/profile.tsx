@@ -1,5 +1,14 @@
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import * as Location from 'expo-location';
+import { useState } from 'react';
+import {
+  ActivityIndicator,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 
 import { ProgressBar } from '@/components/progress-bar';
 import { StatCard } from '@/components/stat-card';
@@ -12,6 +21,57 @@ const averageProgress = Math.round(
 );
 
 export default function ProfileScreen() {
+  const [address, setAddress] = useState('');
+  const [locationMessage, setLocationMessage] = useState('Toque no botao para usar a localizacao atual.');
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+
+  const getAddressFromLocation = async () => {
+    setIsLoadingLocation(true);
+    setLocationMessage('Solicitando permissao de localizacao...');
+
+    try {
+      const permission = await Location.requestForegroundPermissionsAsync();
+
+      if (permission.status !== 'granted') {
+        setLocationMessage('Permissao de localizacao negada.');
+        return;
+      }
+
+      setLocationMessage('Buscando localizacao atual...');
+      const currentLocation = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Balanced,
+      });
+
+      const [place] = await Location.reverseGeocodeAsync({
+        latitude: currentLocation.coords.latitude,
+        longitude: currentLocation.coords.longitude,
+      });
+
+      if (!place) {
+        setLocationMessage('Localizacao encontrada, mas nao foi possivel montar o endereco.');
+        return;
+      }
+
+      const formattedAddress = [
+        place.street,
+        place.streetNumber,
+        place.district,
+        place.city,
+        place.region,
+        place.postalCode,
+      ]
+        .filter(Boolean)
+        .join(', ');
+
+      setAddress(formattedAddress || 'Endereco encontrado pela localizacao atual.');
+      setLocationMessage('Endereco encontrado pela geolocalizacao.');
+    } catch {
+      setLocationMessage('Nao foi possivel obter a localizacao neste dispositivo.');
+    } finally {
+      setIsLoadingLocation(false);
+    }
+  };
+
   return (
     <ScrollView
       style={styles.container}
@@ -48,6 +108,41 @@ export default function ProfileScreen() {
         <StatCard value={completedCourses} label="Concluídos" iconName="checkmark-circle" iconColor="#16A34A" />
         <StatCard value={inProgressCourses} label="Em andamento" iconName="school" />
         <StatCard value={1} label="Certificado" iconName="ribbon" iconColor="#D97706" />
+      </View>
+
+      <View style={styles.locationCard}>
+        <View style={styles.locationHeader}>
+          <View>
+            <Text style={styles.sectionTitle}>Localizacao atual</Text>
+            <Text style={styles.locationSubtitle}>Use a localizacao atual para encontrar o endereco do perfil.</Text>
+          </View>
+          <View style={styles.locationIcon}>
+            <Ionicons name="location" size={20} color="#16A34A" />
+          </View>
+        </View>
+
+        <View style={styles.addressBox}>
+          <Text style={styles.addressLabel}>Endereco encontrado</Text>
+          <Text style={address ? styles.addressValue : styles.addressPlaceholder}>
+            {address || 'Nenhum endereco salvo ainda.'}
+          </Text>
+        </View>
+
+        <Text style={styles.locationMessage}>{locationMessage}</Text>
+
+        <TouchableOpacity
+          activeOpacity={0.85}
+          disabled={isLoadingLocation}
+          style={[styles.locationButton, isLoadingLocation && styles.locationButtonDisabled]}
+          onPress={getAddressFromLocation}
+        >
+          {isLoadingLocation ? (
+            <ActivityIndicator color="#FFFFFF" />
+          ) : (
+            <Ionicons name="locate" size={18} color="#FFFFFF" />
+          )}
+          <Text style={styles.locationButtonText}>Usar localizacao atual</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.section}>
@@ -168,6 +263,84 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: -6,
     marginBottom: 14,
+  },
+  locationCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 16,
+    marginBottom: 14,
+    padding: 18,
+  },
+  locationHeader: {
+    alignItems: 'flex-start',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 14,
+  },
+  locationSubtitle: {
+    color: '#64748B',
+    fontSize: 14,
+    lineHeight: 20,
+    marginTop: 4,
+  },
+  locationIcon: {
+    alignItems: 'center',
+    backgroundColor: '#DCFCE7',
+    borderRadius: 20,
+    height: 40,
+    justifyContent: 'center',
+    marginLeft: 12,
+    width: 40,
+  },
+  addressBox: {
+    backgroundColor: '#F8FAFC',
+    borderColor: '#D8E2EF',
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: 14,
+  },
+  addressLabel: {
+    color: '#64748B',
+    fontSize: 12,
+    fontWeight: '800',
+    marginBottom: 6,
+    textTransform: 'uppercase',
+  },
+  addressValue: {
+    color: '#0F172A',
+    fontSize: 15,
+    fontWeight: '700',
+    lineHeight: 21,
+  },
+  addressPlaceholder: {
+    color: '#94A3B8',
+    fontSize: 15,
+    lineHeight: 21,
+  },
+  locationMessage: {
+    color: '#64748B',
+    fontSize: 13,
+    lineHeight: 19,
+    marginTop: 10,
+  },
+  locationButton: {
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    backgroundColor: '#2563EB',
+    borderRadius: 12,
+    flexDirection: 'row',
+    marginTop: 14,
+    minHeight: 44,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+  },
+  locationButtonDisabled: {
+    opacity: 0.72,
+  },
+  locationButtonText: {
+    color: '#FFFFFF',
+    fontSize: 15,
+    fontWeight: '800',
+    marginLeft: 8,
   },
   section: {
     backgroundColor: '#FFFFFF',
